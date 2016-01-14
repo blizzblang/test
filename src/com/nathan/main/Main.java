@@ -5,7 +5,7 @@ public class Main {
 	{
 		System.out.println("Hello World, my favorite color is green");
 		System.out.println("Do I look like I know what a jpeg is?");
-		UnsignedByte four_bits = new UnsignedByte(100);
+		UnsignedByte four_bits = new UnsignedByte(169);
 		System.out.print("Byte Value "+four_bits.getIntValue()+" or hex "+four_bits.getStrValue());
 	}
 }
