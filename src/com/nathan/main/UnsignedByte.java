@@ -20,7 +20,7 @@ public class UnsignedByte
 	}
 	public void setData(int i)
 	{
-		Data = (short) (0xFFFF | i);
+		Data = (short) (0xFFFF & i);
 	}
 	public boolean checkData(int i)
 	{
@@ -33,6 +33,13 @@ public class UnsignedByte
 			return true;
 		}
 	}
-	
+	public int getIntValue()
+	{
+		return getData();
+	}
+	public String getStrValue()
+	{
+		return Integer.toHexString(getData());
+	}
 
 }
