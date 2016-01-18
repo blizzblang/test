@@ -5,7 +5,7 @@ public class Main {
 	{
 		Timer timeout = new Timer();
 		timeout.start();
-		int Depth =10;
+		int Depth =3;
 		MathHelper Tangent = new MathHelper(Depth);
 		
 		System.out.println("Hello World, my favorite color is green");
@@ -18,14 +18,14 @@ public class Main {
 		Timer Cheat = new Timer();
 		int Stress = (int) 1E8;
 		Hard.start();
-		for(float i=0;i<Stress/(float)Depth;i+=1/(float)Depth)
+		for(float i=0;i<(float)Stress/(float)Math.pow(10, Depth);i+=1/(float)(Math.pow(10, Depth)))
 		{
 			Math.tan(Math.toRadians(i%90));
 		}
 		Hard.stop();
 		System.out.println("Hard Time: "+Hard.getDifference()+" : "+Hard.getSecondsDifference());
 		Cheat.start();
-		for(float i=0;i<Stress/(float)Depth;i+=1/(float)Depth)
+		for(float i=0;i<(float)Stress/(float)Math.pow(10, Depth);i+=1/(float)(Math.pow(10, Depth)))
 		{
 			Tangent.mathTan(i%90);
 		}
