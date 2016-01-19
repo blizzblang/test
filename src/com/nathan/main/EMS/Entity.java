@@ -1,11 +1,21 @@
 
 public abstract class Entity
 {
-private float[] Pos;
-private float[] Dim;
-  public Entity()
+  private float[] Pos;
+  private float[] Dim;
+  enum EntityType
   {
-  
+    PlayerEntity(0),NonPlayerEntity(1),Prop(2);
+    private int Type;
+    private EntityType(int i)
+    {
+      Type=i;
+    }
+  }
+  protected EntityType EntType; 
+  public Entity(EntityType i)
+  {
+  EntType = i;
   }
   public float getX(){return Pos[0];}
   public float getY(){return Pos[1];}
