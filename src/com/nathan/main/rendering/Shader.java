@@ -1,4 +1,5 @@
-public abstract class Shader()
+package com.nathan.main.rendering;
+public abstract class Shader
 {
   private String Frag="";
   private String Vert="";

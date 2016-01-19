@@ -1,3 +1,6 @@
+package com.nathan.main.EMS;
+
+import java.util.ArrayList;
 
 public abstract class Entity
 {
