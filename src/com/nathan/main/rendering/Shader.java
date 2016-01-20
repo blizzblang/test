@@ -10,7 +10,7 @@ public abstract class Shader
   Vert=vert;
   init();
   }
-  private void init()
+  protected void init()
   {
   
   }
