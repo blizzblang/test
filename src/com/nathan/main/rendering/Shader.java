@@ -3,6 +3,7 @@ public abstract class Shader
 {
   private String Frag="";
   private String Vert="";
+  private int ShaderId;
   public Shader(String frag,String vert)
   {
   Frag=frag;

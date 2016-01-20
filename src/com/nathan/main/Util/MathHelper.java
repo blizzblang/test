@@ -1,4 +1,4 @@
-package com.nathan.main;
+package com.nathan.main.Util;
 
 public class MathHelper {
 	float[] Tan;
