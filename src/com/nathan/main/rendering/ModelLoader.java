@@ -6,7 +6,7 @@ public class ModelLoader
     private List<Vector3f> normals = new ArrayList<Vector3f>();
     private List<Vector2f> texverts = new ArrayList<Vector2f>();
     private List<Face> faces = new ArrayList<Face>();
-public ModelLoader(String i)
+public ModelLoader(String i,VBO iv)
 {
   BufferedReader reader = null;
   try
@@ -79,8 +79,27 @@ public ModelLoader(String i)
                        texverts.add(texface);
                    }
     }
-   }catch (IOException e) {e.printStackTrace();}
- 
+    }catch (IOException e) {e.printStackTrace();}
+    try 
+    {
+    reader.close();
+    } catch (IOException e) {e.printStackTrace();}
+    For (Face face : faces) 
+    {
+        Color c = new Color((float) Math.random(),(float) Math.random(),(float) Math.random());
+        Vector3f v1v =  verticies.get((int) (face.vertex.x - 1))
+        Vector3f v2v =  verticies.get((int) (face.vertex.y - 1))
+        Vector3f v3v =  verticies.get((int) (face.vertex.z - 1))
+        Vector2f t1 = texverts.get((int)(face.texture.x-1));
+        Vector2f t2 = texverts.get((int)(face.texture.y-1));
+        Vector2f t3 = texverts.get((int)(face.texture.z-1));
+        Vertex v1 = new Vertex(); v1.setXYZ(v1v.x,v1v.y,v1v.z); v1.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v1.setST(t1.x,t1.y);
+        Vertex v2 = new Vertex(); v1.setXYZ(v2v.x,v2v.y,v2v.z); v2.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v2.setST(t2.x,t2.y);
+        Vertex v3 = new Vertex(); v1.setXYZ(v3v.x,v3v.y,v3v.z); v3.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v3.setST(t3.x,t3.y);
+        iv.addVertex(v1);
+        iv.addVertex(v2);
+        iv.addVertex(v3);
+    }
 }
 
 }
