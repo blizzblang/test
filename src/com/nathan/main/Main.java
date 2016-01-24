@@ -1,33 +1,35 @@
 package com.nathan.main;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Matrix4f;
 
+import com.nathan.main.EMS.Prop;
 import com.nathan.main.Util.ImgLoader;
+import com.nathan.main.Util.KeyInput;
 import com.nathan.main.Util.MathHelper;
 import com.nathan.main.Util.UnsignedByte;
+import com.nathan.main.rendering.Camera;
+import com.nathan.main.rendering.ModelLoader;
 import com.nathan.main.rendering.OpenGL;
 import com.nathan.main.rendering.VBO;
 import com.nathan.main.rendering.Vertex;
 import com.nathan.main.time.Timer;
 
 public class Main {
+	public static Camera cam;
+	public static KeyInput Keyboard;
 	public static void main(String[] a)
 	{
 			OpenGL.initOpenGL(800, 600);
+			cam = new Camera(new float[]{0,0,0});
+			Prop prop = new Prop(0,0,0);
 			
-		VBO test = new VBO();
-		test.addTexture(ImgLoader.loadImage("GameFiles/Image/sinstar/sinstar.png"));
-		Model test = new Model("GameFiles/Model/box/box.obj",test);
-	        test.addVertex(v0);
-	        test.addVertex(v1);
-	        test.addVertex(v2);
-	        test.addVertex(v3);
-	        test.finalize();
+	        
 		while(!Display.isCloseRequested())
 		{
 			OpenGL.LoopStart();
+			prop.Render();
 			
-			test.render();
 			OpenGL.LoopEnd();
 		}
 		Display.destroy();

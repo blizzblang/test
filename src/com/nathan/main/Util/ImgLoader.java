@@ -46,4 +46,12 @@ private static ArrayList<Texture> Textures = new ArrayList<Texture>();
 		}
 		return 0;
 	}
+	public static Texture getTexture(int i)
+	{
+		 for(Texture tex : Textures)
+		 {
+			 if(tex.getTextureID()==i)return tex;
+		 }
+		 return null;
+	}
 }

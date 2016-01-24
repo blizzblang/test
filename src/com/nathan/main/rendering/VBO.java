@@ -10,23 +10,25 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.util.vector.Matrix4f;
 
 
 
 public class VBO
 {
   private ArrayList<Vertex> Verts = new ArrayList<Vertex>();
-  private EntityShader shad = new EntityShader();
+  private EntityShader shad;
   private int vaoId=0;
   private int vboId=0;
   private int vboiId=0;
   private int TexId=0;
   private int indicesCount=0;
-  public VBO()
+  public VBO(Matrix4f i)
   {
   vaoId = GL30.glGenVertexArrays();
   vboId = GL15.glGenBuffers();
   vboiId = GL15.glGenBuffers();
+  shad = new EntityShader(i);
   }
   public void addVertex(Vertex  i)
   {

@@ -2,10 +2,18 @@ package com.nathan.main.EMS;
 
 import java.util.ArrayList;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
+import com.nathan.main.rendering.VBO;
+
 public abstract class Entity
 {
   private float[] Pos;
   private float[] Dim;
+  protected VBO rendered;
+  Vector3f Rotation = new Vector3f(0,0,0);
+  private  Matrix4f modelMatrix = new Matrix4f();
   enum EntityType
   {
     PlayerEntity(0),NonPlayerEntity(1),Prop(2);
@@ -19,6 +27,18 @@ public abstract class Entity
   public Entity(EntityType i)
   {
   EntType = i;
+  }
+  public Matrix4f getMatrix()
+  {
+	  modelMatrix = new Matrix4f();
+      Vector3f modelScale = new Vector3f(1,1,1);
+      Vector3f modelPos = new Vector3f(1,1,1);
+      Matrix4f.scale(modelScale, modelMatrix, modelMatrix);
+      Matrix4f.translate(modelPos, modelMatrix, modelMatrix);
+      Matrix4f.rotate((float) Math.toRadians(Rotation.z), new Vector3f(0, 0, 1), modelMatrix, modelMatrix);
+      Matrix4f.rotate((float) Math.toRadians(Rotation.y), new Vector3f(0, 1, 0), modelMatrix, modelMatrix);
+      Matrix4f.rotate((float) Math.toRadians(Rotation.x), new Vector3f(1, 0, 0), modelMatrix, modelMatrix);
+      return  modelMatrix;
   }
   public float getX(){return Pos[0];}
   public float getY(){return Pos[1];}

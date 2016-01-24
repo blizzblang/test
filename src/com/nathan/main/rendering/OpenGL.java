@@ -9,6 +9,8 @@ import org.lwjgl.opengl.PixelFormat;
 
 public class OpenGL 
 {
+	public static int Width;
+	public static int Height =0;
 	public static void initOpenGL(int x,int y)
 	{
 	      
@@ -29,6 +31,8 @@ public class OpenGL
         GL11.glClearColor(0.4f, 0.6f, 0.9f, 0f);
          
         // Map the internal OpenGL coordinate system to the entire screen
+        Width = x;
+        Height=y;
         GL11.glViewport(0, 0, x, y);
 
 	}
@@ -42,5 +46,10 @@ public class OpenGL
 	{
 		Display.update();
 		
+	}
+
+	public static float getAspectRatio() 
+	{
+	return Width/Height;	
 	}
 }

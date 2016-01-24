@@ -1,4 +1,4 @@
-package com.nathan.main.rendering
+package com.nathan.main.rendering;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.Color;
  

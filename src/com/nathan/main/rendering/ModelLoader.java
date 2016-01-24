@@ -1,17 +1,30 @@
 package com.nathan.main.rendering;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
+
 public class ModelLoader
 {
-    private List<Vector3f> verticies = new ArrayList<Vector3f>();
-    private List<Vector3f> normals = new ArrayList<Vector3f>();
-    private List<Vector2f> texverts = new ArrayList<Vector2f>();
-    private List<Face> faces = new ArrayList<Face>();
-public ModelLoader(String i,VBO iv)
+    private ArrayList<Vector3f> verticies = new ArrayList<Vector3f>();
+    private ArrayList<Vector3f> normals = new ArrayList<Vector3f>();
+    private ArrayList<Vector2f> texverts = new ArrayList<Vector2f>();
+    private ArrayList<Face> faces = new ArrayList<Face>();
+public ModelLoader(String i,VBO iv,Texture tex)
 {
+	iv.addTexture(tex.getTextureID());
   BufferedReader reader = null;
   try
   { 
-   reader = new BufferedReader(new FileReader(path));
+   reader = new BufferedReader(new FileReader(new File(i)));
   }
   catch(FileNotFoundException e) {e.printStackTrace();}
   String line;
@@ -43,6 +56,7 @@ public ModelLoader(String i,VBO iv)
                        z=Float.valueOf(line.split(" ")[3].split("/")[0]);
                        Vector3f vertindex = new Vector3f(x, y, z);
                        Vector3f text = null;
+                
                        if(tex!=null)
                        {
  
@@ -84,12 +98,12 @@ public ModelLoader(String i,VBO iv)
     {
     reader.close();
     } catch (IOException e) {e.printStackTrace();}
-    For (Face face : faces) 
+    for(Face face : faces) 
     {
         Color c = new Color((float) Math.random(),(float) Math.random(),(float) Math.random());
-        Vector3f v1v =  verticies.get((int) (face.vertex.x - 1))
-        Vector3f v2v =  verticies.get((int) (face.vertex.y - 1))
-        Vector3f v3v =  verticies.get((int) (face.vertex.z - 1))
+        Vector3f v1v =  verticies.get((int) (face.vertex.x - 1));
+        Vector3f v2v =  verticies.get((int) (face.vertex.y - 1));
+        Vector3f v3v =  verticies.get((int) (face.vertex.z - 1));
         Vector2f t1 = texverts.get((int)(face.texture.x-1));
         Vector2f t2 = texverts.get((int)(face.texture.y-1));
         Vector2f t3 = texverts.get((int)(face.texture.z-1));
