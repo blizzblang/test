@@ -34,12 +34,13 @@ public class OpenGL
         Width = x;
         Height=y;
         GL11.glViewport(0, 0, x, y);
-
+		GL11.glEnable(GL11.GL_DEPTH_TEST);  
+		GL11.glDepthFunc(GL11.GL_LESS);
 	}
 
 	public static void LoopStart() 
 	{
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 	}
 
 	public static void LoopEnd() 

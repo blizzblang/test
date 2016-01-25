@@ -1,6 +1,7 @@
 package com.nathan.main;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
 import com.nathan.main.EMS.Prop;
@@ -17,17 +18,19 @@ import com.nathan.main.time.Timer;
 
 public class Main {
 	public static Camera cam;
-	public static KeyInput Keyboard;
+	public static KeyInput Keyboard = new KeyInput();
 	public static void main(String[] a)
 	{
 			OpenGL.initOpenGL(800, 600);
-			cam = new Camera(new float[]{0,0,0});
-			Prop prop = new Prop(0,0,0);
+			cam = new Camera(new float[]{0,0,-4});
+			Prop prop = new Prop(0,-1,0);
 			
-	        
+
 		while(!Display.isCloseRequested())
 		{
 			OpenGL.LoopStart();
+			Keyboard.Update();
+			cam.update();
 			prop.Render();
 			
 			OpenGL.LoopEnd();

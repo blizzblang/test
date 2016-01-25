@@ -85,7 +85,7 @@ public class EntityShader extends Shader
 	        
 	        GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 	        
-	        view.store(matrix44Buffer); matrix44Buffer.flip();
+	        Main.cam.getViewMatrix().store(matrix44Buffer); matrix44Buffer.flip();
 	        
 	        GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
 	        

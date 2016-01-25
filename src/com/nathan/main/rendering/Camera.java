@@ -1,7 +1,10 @@
 package com.nathan.main.rendering;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
+
+import com.nathan.main.Main;
 
 public class Camera 
 {
@@ -12,6 +15,7 @@ private float FOV=60;
 private float near_plane = 0.1f;
 private float far_plane = 100f;
 private float frustum_length = far_plane - near_plane;
+private Vector3f Angle = new Vector3f(0,0,0);
 	public Camera(float[] pos)
 	{
 		Pos = new float[]{pos[0],pos[1],pos[2]};
@@ -29,10 +33,25 @@ private float frustum_length = far_plane - near_plane;
 	}
 	public void update()
 	{
+		float lmod=1f;
+		float mod=0.01f;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_A))Angle.y -= 0.01*lmod;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_D))Angle.y += 0.01*lmod;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_W))Angle.x -= 0.01*lmod;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_S))Angle.x += 0.01*lmod;
 		
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_T))Pos[2] += 0.01*mod;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_G))Pos[2] -= 0.01*mod;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_F))Pos[0] += 0.01*mod;
+		if(Main.Keyboard.getKeyDown(Keyboard.KEY_H))Pos[0] -= 0.01*mod;
 	}
 	public Matrix4f getViewMatrix()
 	{
-		return Matrix4f.translate(new Vector3f(Pos[0],Pos[1],Pos[2]),  viewMatrix ,  viewMatrix );
+		viewMatrix = new Matrix4f();
+		viewMatrix.rotate((float) Math.toRadians(Angle.x), new Vector3f(1,0,0), viewMatrix);
+		viewMatrix.rotate((float) Math.toRadians(Angle.y), new Vector3f(0,1,0), viewMatrix);
+		viewMatrix.rotate((float) Math.toRadians(Angle.z), new Vector3f(0,0,1), viewMatrix);
+		Matrix4f.translate(new Vector3f(Pos[0],Pos[1],Pos[2]),  viewMatrix ,  viewMatrix );
+		return viewMatrix;
 	}
 }

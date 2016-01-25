@@ -108,11 +108,11 @@ public ModelLoader(String i,VBO iv,Texture tex)
         Vector2f t2 = texverts.get((int)(face.texture.y-1));
         Vector2f t3 = texverts.get((int)(face.texture.z-1));
         Vertex v1 = new Vertex(); v1.setXYZ(v1v.x,v1v.y,v1v.z); v1.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v1.setST(t1.x,t1.y);
-        Vertex v2 = new Vertex(); v1.setXYZ(v2v.x,v2v.y,v2v.z); v2.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v2.setST(t2.x,t2.y);
-        Vertex v3 = new Vertex(); v1.setXYZ(v3v.x,v3v.y,v3v.z); v3.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v3.setST(t3.x,t3.y);
-        iv.addVertex(v1);
-        iv.addVertex(v2);
+        Vertex v2 = new Vertex(); v2.setXYZ(v2v.x,v2v.y,v2v.z); v2.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v2.setST(t2.x,t2.y);
+        Vertex v3 = new Vertex(); v3.setXYZ(v3v.x,v3v.y,v3v.z); v3.setRGB(c.getRed()/255f,c.getGreen()/255f,c.getBlue()/255f);v3.setST(t3.x,t3.y);
         iv.addVertex(v3);
+        iv.addVertex(v2);
+        iv.addVertex(v1);
     }
 }
 
