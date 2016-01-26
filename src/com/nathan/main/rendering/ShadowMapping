@@ -1,0 +1,35 @@
+package com.nathan.main.rendering;
+
+public class ShadowMapping
+{
+  private int Depth=2;
+  private FBO OcclusionMap;
+  private FBO ShadowMap;
+  private ShadowShader Mapper;
+  public ShadowMapping(int i)
+  {
+    Depth=i;
+    OcclusionMap = new FBO(Math.pow(2,Depth));
+    ShadowMap = new FBO(Math.pow(2,Depth));
+    Mapper = new ShadowShader();
+  }
+  public void beginRenderToOcclusionMap()
+  {
+  OcclusionMap.bindFBO()
+  }
+  public void endRenderToOcclusionMap()
+  {
+  OcclusionMap.unbindFBO()
+  }
+  private void RenderToShadowMap()
+  {
+  Mapper.bind();
+  ShadowMap.bind();
+  glClearColor(0f,0f,0f,0f);
+  glClear(GL10.GL_COLOR_BUFFER_BIT);
+  //TODO Draw the occluder map here
+  Mapper.unbind();
+  Shadow.unbind();
+  }
+  
+}
