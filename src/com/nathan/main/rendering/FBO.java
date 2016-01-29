@@ -5,8 +5,10 @@ public class FBO
   private int fboId;
   private int fbotexId;
   private int fboDepthId;
-  public FBO()
+  DefaultShader bound;
+  public FBO(DefaultShader in)
   {
+  bound = in;
   fboId = glGenFramebuffersEXT();                                         // create a new framebuffer
   fbotexId = glGenTextures();                                               // and a new texture used as a color buffer
   fboDepthId = glGenRenderbuffersEXT();                                  // And finally a new depthbuffer
