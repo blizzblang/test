@@ -27,12 +27,13 @@ public abstract class Entity
   public Entity(EntityType i)
   {
   EntType = i;
+  Pos = new float[]{0,0,0};
   }
   public Matrix4f getMatrix()
   {
 	  modelMatrix = new Matrix4f();
       Vector3f modelScale = new Vector3f(1,1,1);
-      Vector3f modelPos = new Vector3f(1,1,1);
+      Vector3f modelPos = new Vector3f(Pos[0],Pos[1],Pos[2]);
       Matrix4f.scale(modelScale, modelMatrix, modelMatrix);
       Matrix4f.translate(modelPos, modelMatrix, modelMatrix);
       Matrix4f.rotate((float) Math.toRadians(Rotation.z), new Vector3f(0, 0, 1), modelMatrix, modelMatrix);
@@ -50,5 +51,6 @@ public abstract class Entity
   public void setXYZ(float[] i){setXYZ(i[0],i[1],i[2]);}
   public void setXYZ(float x,float y,float z){Pos = new float[]{x,y,z};}
   public abstract void Tick(ArrayList<Entity> i);
-  public abstract void Render();
+  public void Render(){Render(true);}
+  public abstract void Render(boolean shader);
 }

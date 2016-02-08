@@ -74,22 +74,20 @@ public class EntityShader extends Shader
 	        viewMatrixLocation = GL20.glGetUniformLocation( ShaderId, "viewMatrix");
 	        modelMatrixLocation = GL20.glGetUniformLocation( ShaderId, "modelMatrix");
 	}
-	@Override
-	public void Bind() 
+	public void Bind(Entity i) 
 	{
 		
-		 ARBShaderObjects.glUseProgramObjectARB(ShaderId);
+		
 
-	         
-		 	projection.store(matrix44Buffer); matrix44Buffer.flip();
+		 	ARBShaderObjects.glUseProgramObjectARB(ShaderId);
+		 	Main.cam.getProjectionMatrix().store(matrix44Buffer); matrix44Buffer.flip();
 	        
 	        GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 	        
 	        Main.cam.getViewMatrix().store(matrix44Buffer); matrix44Buffer.flip();
 	        
 	        GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
-	        
-	        model.store(matrix44Buffer); matrix44Buffer.flip();
+	        i.getMatrix().store(matrix44Buffer); matrix44Buffer.flip();
 	        
 	        GL20.glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
 	        
@@ -102,6 +100,11 @@ public class EntityShader extends Shader
 	public void unBind() 
 	{
 		 ARBShaderObjects.glUseProgramObjectARB(0);
+		
+	}
+	@Override
+	public void Bind() {
+		Bind(null);
 		
 	}
 

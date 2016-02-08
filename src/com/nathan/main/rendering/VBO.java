@@ -12,6 +12,8 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
 
+import com.nathan.main.EMS.Entity;
+
 
 
 public class VBO
@@ -64,9 +66,10 @@ public class VBO
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
          
   }
-  public void render()
+  public void render(Entity i,boolean shader)
   {
-    shad.Bind();
+	  if(shader)
+	 shad.Bind(i);
      GL13.glActiveTexture(GL13.GL_TEXTURE0);
      GL11.glBindTexture(GL11.GL_TEXTURE_2D, TexId);
      GL30.glBindVertexArray(vaoId);
@@ -80,11 +83,15 @@ public class VBO
      GL20.glDisableVertexAttribArray(1);
      GL20.glDisableVertexAttribArray(2);
      GL30.glBindVertexArray(0);
-  shad.unBind();
+     if(shader)
+     shad.unBind();
   }
 	public void addTexture(int i) 
 	{
 		TexId=i;
 		
+	}
+	public int getTexture() {
+		return TexId;
 	}
 }

@@ -36,13 +36,24 @@ public class OpenGL
         GL11.glViewport(0, 0, x, y);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);  
 		GL11.glDepthFunc(GL11.GL_LESS);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	public static void LoopStart() 
 	{
+		GL11.glViewport(0, 0, Width, Height);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		GL11.glClearColor(0.4f, 0.6f, 0.9f, 0f);
+		
 	}
-
+	public static void ResetView() 
+	{
+		GL11.glViewport(0, 0, Width, Height);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0f);
+		
+	}
 	public static void LoopEnd() 
 	{
 		Display.update();
@@ -53,4 +64,5 @@ public class OpenGL
 	{
 	return Width/Height;	
 	}
+
 }

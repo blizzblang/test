@@ -13,8 +13,9 @@ public class Prop extends Entity
 	public Prop(float [] pos)
 	{
 		super(EntityType.Prop);
+		setXYZ(pos);
 		rendered = new VBO(getMatrix());
-	ModelLoader testt = new ModelLoader("GameFiles/Model/box/box.obj",rendered,ImgLoader.getTexture(ImgLoader.loadImage("GameFiles/Image/sinstar/sinstar.png")));
+		ModelLoader testt = new ModelLoader("GameFiles/Model/box/box.obj",rendered,ImgLoader.getTexture(ImgLoader.loadImage("GameFiles/Image/sinstar/sinstar.png")));
 //        Vertex v0 = new Vertex(); 
 //        v0.setXYZ(-0.5f, 0.5f, 0); v0.setRGB(1, 0, 0); v0.setST(0, 0);
 //        Vertex v1 = new Vertex(); 
@@ -40,9 +41,18 @@ public class Prop extends Entity
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
-	public void Render() {
-		rendered.render();
+	public void Render(boolean shader) {
+		rendered.render(this,shader);
+		
+	}
+	public void setTexture(int i)
+	{
+		rendered.addTexture(i);
+	}
+	public int getTexture() {
+		return rendered.getTexture();
 		
 	}
 

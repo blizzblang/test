@@ -1,6 +1,20 @@
 package com.nathan.main.rendering;
 
-public class DefaultShader
+import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBFragmentShader;
+import org.lwjgl.opengl.ARBShaderObjects;
+import org.lwjgl.opengl.ARBVertexShader;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
+import com.nathan.main.Main;
+import com.nathan.main.EMS.Entity;
+
+public class DefaultShader extends Shader
 {
   private FloatBuffer matrix44Buffer = BufferUtils.createFloatBuffer(16);
   private int projectionMatrixLocation;
@@ -56,12 +70,12 @@ public class DefaultShader
 	        viewMatrixLocation = GL20.glGetUniformLocation( ShaderId, "viewMatrix");
 	        modelMatrixLocation = GL20.glGetUniformLocation( ShaderId, "modelMatrix");
 	}
-	public void Bind()
+	public void Bind(Matrix4f i)
 	{
 			 ARBShaderObjects.glUseProgramObjectARB(ShaderId);
 
 	         
-		 	projection.store(matrix44Buffer); matrix44Buffer.flip();
+		 	Main.cam.getProjectionMatrix().store(matrix44Buffer); matrix44Buffer.flip();
 	        
 	        GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
 	        
@@ -69,12 +83,54 @@ public class DefaultShader
 	        
 	        GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
 	        
-	        model.store(matrix44Buffer); matrix44Buffer.flip();
+	        i.store(matrix44Buffer); matrix44Buffer.flip();
 	        
 	        GL20.glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
+	}
+	public void Bind(Matrix4f p,Matrix4f v,Matrix4f m)
+	{
+		 ARBShaderObjects.glUseProgramObjectARB(ShaderId);
+
+        if(p == null)
+        {
+	 	Main.cam.getProjectionMatrix().store(matrix44Buffer); matrix44Buffer.flip();
+        }
+        else
+        {
+	 	p.store(matrix44Buffer); matrix44Buffer.flip();
+        }
+       GL20.glUniformMatrix4(projectionMatrixLocation, false, matrix44Buffer);
+       
+       if(v==null)
+       {
+       Main.cam.getViewMatrix().store(matrix44Buffer); matrix44Buffer.flip();
+       }
+       else
+       {
+    	v.store(matrix44Buffer); matrix44Buffer.flip();
+       }
+       GL20.glUniformMatrix4(viewMatrixLocation, false, matrix44Buffer);
+       if(m!=null)
+       {
+       m.store(matrix44Buffer); matrix44Buffer.flip();
+       }
+       else
+       {
+    	   Matrix4f t = new Matrix4f();
+    	
+       t.store(matrix44Buffer);matrix44Buffer.flip();
+       }
+       
+       GL20.glUniformMatrix4(modelMatrixLocation, false, matrix44Buffer);
 	}
 	public void unBind()
 	{
 	   ARBShaderObjects.glUseProgramObjectARB(0);
+	}
+	@Override
+	public void Bind() {
+		Matrix4f out = new Matrix4f();
+		Bind(out);
+		
 	}
 }

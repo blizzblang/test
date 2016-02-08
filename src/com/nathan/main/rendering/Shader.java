@@ -140,6 +140,16 @@ public abstract class Shader
        
       return source.toString();
   }
+  public void setTex(String string, int i)
+  {
+	    int loc = GL20.glGetUniformLocation(ShaderId, string);
+	    GL20.glUniform1i(loc, i);
+  }
+  public void setUniformf(String string, int i,int j) 
+  {
+	  
+	  GL20.glUniform2f(GL20.glGetUniformLocation(ShaderId, string), i, j );
+  }
   public abstract void Bind();
   public abstract void unBind();
 }
