@@ -18,12 +18,13 @@ public class FBO
   private int fboId;
   private int fbotexId;
   private int fboDepthId;
+
   private int[] Dim=new int[2];
   private quad Quad = new quad();
   public  DefaultShader shader;
-  public FBO(String frag,String vert)
+  public FBO(DefaultShader in)
   {
-  this(512,512,frag,vert);
+  this(512,512,in.Vert,in.Frag);
   }
   public FBO(int i,String v,String f) 
   {
@@ -55,7 +56,7 @@ public class FBO
 	  glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT,GL_DEPTH_ATTACHMENT_EXT,GL_RENDERBUFFER_EXT, fboDepthId);
 	  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);     
   }
-  
+
 public void bindFBO()
   {
                                          // set The Current Viewport to the fbo size
